@@ -24,6 +24,7 @@ const HERO_TAGLINES = [
 type RunStatus = 'running' | 'completed' | 'error' | 'cancelled';
 
 interface ModelRunState {
+  runId: string;
   modelId: string;
   streamedText: string;
   status: RunStatus;
@@ -54,6 +55,13 @@ const defaultTitleForModel = (modelId: string) => {
 
 const getModelLabel = (model: ModelSummary) => model.name ?? model.id;
 
+const createRunId = () => {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
+
 export default function GeneratePage() {
   const { config, setConfig } = useLocalConfig();
   const [prompt, setPrompt] = useState('car');
@@ -65,7 +73,7 @@ export default function GeneratePage() {
   const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [modelError, setModelError] = useState('');
   const [generationError, setGenerationError] = useState<string | null>(null);
-  const [runs, setRuns] = useState<Record<string, ModelRunState>>({});
+  const [runs, setRuns] = useState<ModelRunState[]>([]);
   const controllersRef = useRef<Record<string, AbortController>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -124,12 +132,16 @@ useEffect(() => {
   }, [modelQuery, models]);
 
   const orderedRuns = useMemo(() => {
-    return Object.values(runs).sort((a, b) => b.startedAt - a.startedAt);
+    return [...runs].sort((a, b) => b.startedAt - a.startedAt);
   }, [runs]);
 
   const activeRunCount = useMemo(() => orderedRuns.filter((run) => run.status === 'running').length, [orderedRuns]);
 
   const heroText = useMemo(() => HERO_TAGLINES[Math.floor(Math.random() * HERO_TAGLINES.length)], []);
+
+  const updateRun = useCallback((runId: string, updater: (run: ModelRunState) => ModelRunState) => {
+    setRuns((prev) => prev.map((run) => (run.runId === runId ? updater(run) : run)));
+  }, []);
 
   const toggleModelSelection = (modelId: string) => {
     setSelectedModels((prev) => {
@@ -160,28 +172,28 @@ useEffect(() => {
       return;
     }
     const controller = new AbortController();
-    controllersRef.current[modelId]?.abort();
-    controllersRef.current[modelId] = controller;
+    const runId = createRunId();
+    controllersRef.current[runId] = controller;
 
-    setRuns((prev) => ({
-      ...prev,
-      [modelId]: {
-        modelId,
-        streamedText: '',
-        status: 'running',
-        result: undefined,
-        previewSvg: undefined,
-        error: undefined,
-        statusMessage: '',
-        isPublishing: false,
-        isExportingPng: false,
-        isExportingGif: false,
-        durationMs: undefined,
-        animationSpeed: prev[modelId]?.animationSpeed ?? 40,
-        title: prev[modelId]?.title ?? defaultTitleForModel(modelId),
-        startedAt: Date.now(),
-      },
-    }));
+    const baseRun: ModelRunState = {
+      runId,
+      modelId,
+      streamedText: '',
+      status: 'running',
+      result: undefined,
+      previewSvg: undefined,
+      error: undefined,
+      statusMessage: '',
+      isPublishing: false,
+      isExportingPng: false,
+      isExportingGif: false,
+      durationMs: undefined,
+      animationSpeed: 40,
+      title: defaultTitleForModel(modelId),
+      startedAt: Date.now(),
+    };
+
+    setRuns((prev) => [baseRun, ...prev]);
 
     void generatePixelArt(
       {
@@ -194,117 +206,77 @@ useEffect(() => {
       {
         signal: controller.signal,
         onToken: (chunk) => {
-          setRuns((prev) => {
-            const current = prev[modelId];
-            if (!current) return prev;
-            return {
-              ...prev,
-              [modelId]: {
-                ...current,
-                streamedText: `${current.streamedText}${chunk}`,
-              },
-            };
-          });
+          updateRun(runId, (current) => ({
+            ...current,
+            streamedText: `${current.streamedText}${chunk}`,
+          }));
         },
       },
     )
       .then((result) => {
         const svg = buildSvg(result.grid);
         const finishedAt = Date.now();
-        setRuns((prev) => {
-          const current = prev[modelId];
-          if (!current) return prev;
-          return {
-            ...prev,
-            [modelId]: {
-              ...current,
-              status: 'completed',
-              result,
-              previewSvg: svg,
-              title: result.title ?? current.title,
-              error: undefined,
-              statusMessage: 'Generation finished ✅',
-              durationMs: finishedAt - current.startedAt,
-            },
-          };
-        });
+        updateRun(runId, (current) => ({
+          ...current,
+          status: 'completed',
+          result,
+          previewSvg: svg,
+          title: result.title ?? current.title,
+          error: undefined,
+          statusMessage: 'Generation finished ✅',
+          durationMs: finishedAt - current.startedAt,
+        }));
       })
       .catch((error) => {
         console.error(error);
         const isAbort = error instanceof DOMException && error.name === 'AbortError';
-        setRuns((prev) => {
-          const current = prev[modelId];
-          if (!current) return prev;
-          return {
-            ...prev,
-            [modelId]: {
-              ...current,
-              status: isAbort ? 'cancelled' : 'error',
-              error: isAbort ? 'Stream aborted for this model' : error instanceof Error ? error.message : 'Generation failed',
-              statusMessage: isAbort ? 'Generation aborted' : '',
-            },
-          };
-        });
+        updateRun(runId, (current) => ({
+          ...current,
+          status: isAbort ? 'cancelled' : 'error',
+          error: isAbort ? 'Stream aborted for this model' : error instanceof Error ? error.message : 'Generation failed',
+          statusMessage: isAbort ? 'Generation aborted' : '',
+        }));
       })
       .finally(() => {
-        delete controllersRef.current[modelId];
+        delete controllersRef.current[runId];
       });
   };
 
-  const handleCancelRun = (modelId: string) => {
-    controllersRef.current[modelId]?.abort();
+  const handleCancelRun = (runId: string) => {
+    controllersRef.current[runId]?.abort();
   };
 
-  const handleTitleChange = (modelId: string, value: string) => {
-    setRuns((prev) => {
-      const current = prev[modelId];
-      if (!current) return prev;
-      return {
-        ...prev,
-        [modelId]: {
-          ...current,
-          title: value,
-        },
-      };
-    });
+  const handleTitleChange = (runId: string, value: string) => {
+    updateRun(runId, (current) => ({
+      ...current,
+      title: value,
+    }));
   };
 
-  const handlePublish = async (modelId: string) => {
-    const run = runs[modelId];
+  const getRunById = (runId: string) => runs.find((run) => run.runId === runId);
+
+  const handlePublish = async (runId: string) => {
+    const run = getRunById(runId);
     if (!run?.result) return;
     if (!config.authorHandle) {
-      setRuns((prev) => {
-        const current = prev[modelId];
-        if (!current) return prev;
-        return {
-          ...prev,
-          [modelId]: {
-            ...current,
-            statusMessage: 'Add a display handle before publishing.',
-          },
-        };
-      });
+      updateRun(runId, (current) => ({
+        ...current,
+        statusMessage: 'Add a display handle before publishing.',
+      }));
       return;
     }
 
-    setRuns((prev) => {
-      const current = prev[modelId];
-      if (!current) return prev;
-      return {
-        ...prev,
-        [modelId]: {
-          ...current,
-          isPublishing: true,
-          statusMessage: 'Publishing...'
-        },
-      };
-    });
+    updateRun(runId, (current) => ({
+      ...current,
+      isPublishing: true,
+      statusMessage: 'Publishing...'
+    }));
 
     try {
       await createArtwork({
         title: run.title,
         prompt,
-        model: modelId,
+        model: run.modelId,
         authorHandle: config.authorHandle,
         grid: run.result.grid,
         previewSvg: run.previewSvg ?? buildSvg(run.result.grid),
@@ -312,33 +284,19 @@ useEffect(() => {
         steps: run.result.steps,
         durationMs: run.durationMs ?? 0,
       });
-      setRuns((prev) => {
-        const current = prev[modelId];
-        if (!current) return prev;
-        return {
-          ...prev,
-          [modelId]: {
-            ...current,
-            isPublishing: false,
-            statusMessage: 'Published to the community ✨',
-          },
-        };
-      });
+      updateRun(runId, (current) => ({
+        ...current,
+        isPublishing: false,
+        statusMessage: 'Published to the community ✨',
+      }));
       setToastMessage('Sprite published to the community!');
     } catch (error) {
       console.error(error);
-      setRuns((prev) => {
-        const current = prev[modelId];
-        if (!current) return prev;
-        return {
-          ...prev,
-          [modelId]: {
-            ...current,
-            isPublishing: false,
-            statusMessage: error instanceof Error ? error.message : 'Failed to publish',
-          },
-        };
-      });
+      updateRun(runId, (current) => ({
+        ...current,
+        isPublishing: false,
+        statusMessage: error instanceof Error ? error.message : 'Failed to publish',
+      }));
     }
   };
 
@@ -347,67 +305,39 @@ useEffect(() => {
     return base;
   };
 
-  const handleDownloadPng = async (modelId: string) => {
-    const run = runs[modelId];
+  const handleDownloadPng = async (runId: string) => {
+    const run = getRunById(runId);
     if (!run?.result) return;
-    setRuns((prev) => {
-      const current = prev[modelId];
-      if (!current) return prev;
-      return {
-        ...prev,
-        [modelId]: {
-          ...current,
-          isExportingPng: true,
-          statusMessage: 'Exporting PNG...'
-        },
-      };
-    });
+    updateRun(runId, (current) => ({
+      ...current,
+      isExportingPng: true,
+      statusMessage: 'Exporting PNG...'
+    }));
     try {
       await downloadSpritePng(filenameForRun(run), run.result.grid);
-      setRuns((prev) => {
-        const current = prev[modelId];
-        if (!current) return prev;
-        return {
-          ...prev,
-          [modelId]: {
-            ...current,
-            isExportingPng: false,
-            statusMessage: 'PNG downloaded',
-          },
-        };
-      });
+      updateRun(runId, (current) => ({
+        ...current,
+        isExportingPng: false,
+        statusMessage: 'PNG downloaded',
+      }));
     } catch (error) {
       console.error(error);
-      setRuns((prev) => {
-        const current = prev[modelId];
-        if (!current) return prev;
-        return {
-          ...prev,
-          [modelId]: {
-            ...current,
-            isExportingPng: false,
-            statusMessage: error instanceof Error ? error.message : 'PNG export failed',
-          },
-        };
-      });
+      updateRun(runId, (current) => ({
+        ...current,
+        isExportingPng: false,
+        statusMessage: error instanceof Error ? error.message : 'PNG export failed',
+      }));
     }
   };
 
-  const handleDownloadGif = async (modelId: string) => {
-    const run = runs[modelId];
+  const handleDownloadGif = async (runId: string) => {
+    const run = getRunById(runId);
     if (!run?.result || !run.result.steps.length) return;
-    setRuns((prev) => {
-      const current = prev[modelId];
-      if (!current) return prev;
-      return {
-        ...prev,
-        [modelId]: {
-          ...current,
-          isExportingGif: true,
-          statusMessage: 'Exporting GIF...'
-        },
-      };
-    });
+    updateRun(runId, (current) => ({
+      ...current,
+      isExportingGif: true,
+      statusMessage: 'Exporting GIF...'
+    }));
     try {
       await downloadSpriteGif({
         filename: filenameForRun(run),
@@ -416,47 +346,26 @@ useEffect(() => {
         steps: run.result.steps,
         delayMs: run.animationSpeed,
       });
-      setRuns((prev) => {
-        const current = prev[modelId];
-        if (!current) return prev;
-        return {
-          ...prev,
-          [modelId]: {
-            ...current,
-            isExportingGif: false,
-            statusMessage: 'GIF downloaded',
-          },
-        };
-      });
+      updateRun(runId, (current) => ({
+        ...current,
+        isExportingGif: false,
+        statusMessage: 'GIF downloaded',
+      }));
     } catch (error) {
       console.error(error);
-      setRuns((prev) => {
-        const current = prev[modelId];
-        if (!current) return prev;
-        return {
-          ...prev,
-          [modelId]: {
-            ...current,
-            isExportingGif: false,
-            statusMessage: error instanceof Error ? error.message : 'GIF export failed',
-          },
-        };
-      });
+      updateRun(runId, (current) => ({
+        ...current,
+        isExportingGif: false,
+        statusMessage: error instanceof Error ? error.message : 'GIF export failed',
+      }));
     }
   };
 
-  const handleAnimationSpeedChange = (modelId: string, value: number) => {
-    setRuns((prev) => {
-      const current = prev[modelId];
-      if (!current) return prev;
-      return {
-        ...prev,
-        [modelId]: {
-          ...current,
-          animationSpeed: value,
-        },
-      };
-    });
+  const handleAnimationSpeedChange = (runId: string, value: number) => {
+    updateRun(runId, (current) => ({
+      ...current,
+      animationSpeed: value,
+    }));
   };
 
   const handleClearSelection = () => {
@@ -701,7 +610,7 @@ useEffect(() => {
                         <p className="text-xs uppercase tracking-[0.3em] text-white/50">Sprite title</p>
                         <input
                           value={run.title}
-                          onChange={(e) => handleTitleChange(run.modelId, e.target.value)}
+                          onChange={(e) => handleTitleChange(run.runId, e.target.value)}
                           className="mt-2 w-full rounded-xl border border-white/20 bg-transparent px-3 py-2 text-lg font-semibold"
                         />
                       </div>
@@ -724,13 +633,13 @@ useEffect(() => {
                           steps={run.result.steps}
                           pixelSize={playerPixelSize}
                           speed={run.animationSpeed}
-                          onSpeedChange={(value) => handleAnimationSpeedChange(run.modelId, value)}
+                          onSpeedChange={(value) => handleAnimationSpeedChange(run.runId, value)}
                         />
                       )}
                       <div className="flex flex-wrap gap-2 text-sm">
                         <button
                           type="button"
-                          onClick={() => handleDownloadPng(run.modelId)}
+                          onClick={() => handleDownloadPng(run.runId)}
                           disabled={run.isExportingPng}
                           className="rounded-full border border-white/20 px-4 py-2 text-white/80 transition hover:border-brand-400 disabled:cursor-not-allowed disabled:text-white/40"
                         >
@@ -738,7 +647,7 @@ useEffect(() => {
                         </button>
                         <button
                           type="button"
-                          onClick={() => handleDownloadGif(run.modelId)}
+                          onClick={() => handleDownloadGif(run.runId)}
                           disabled={run.isExportingGif || !run.result.steps.length}
                           className="rounded-full border border-white/20 px-4 py-2 text-white/80 transition hover:border-brand-400 disabled:cursor-not-allowed disabled:text-white/40"
                         >
@@ -746,7 +655,7 @@ useEffect(() => {
                         </button>
                         <button
                           type="button"
-                          onClick={() => handlePublish(run.modelId)}
+                          onClick={() => handlePublish(run.runId)}
                           disabled={!config.authorHandle || run.isPublishing}
                           className="rounded-full border border-brand-400 px-4 py-2 text-white transition hover:bg-brand-500 disabled:cursor-not-allowed disabled:border-white/20 disabled:text-white/40"
                         >
@@ -792,7 +701,7 @@ useEffect(() => {
                     {run.status === 'running' && (
                       <button
                         type="button"
-                        onClick={() => handleCancelRun(run.modelId)}
+                        onClick={() => handleCancelRun(run.runId)}
                         className="rounded-2xl border border-white/20 py-2 text-sm text-white/80 transition hover:border-red-400 hover:text-red-200"
                       >
                         Stop this model

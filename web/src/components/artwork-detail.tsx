@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState, useTransition } from 'react';
-import Link from 'next/link';
 import { Artwork } from '@/lib/types';
 import { downloadSpriteGif, downloadSpritePng } from '@/lib/exporters';
 import { PixelPreview } from './pixel-preview';
@@ -142,12 +141,6 @@ export function ArtworkDetail({ artwork }: Props) {
         >
           {downloadingGif ? 'Exporting GIF...' : safeSteps.length ? 'Download GIF' : 'No GIF available'}
         </button>
-        <Link
-          href="/community"
-          className="rounded-full border border-white/20 px-4 py-2 text-sm text-white/70 transition hover:border-white/60"
-        >
-          Back to community
-        </Link>
       </div>
 
       {safeSteps.length > 0 ? (
