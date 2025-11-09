@@ -1,0 +1,765 @@
+
+> web@0.1.0 dev
+> next dev --port 3000
+
+  ▲ Next.js 14.2.8
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · typedRoutes
+
+ ✓ Starting...
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you. Strict-mode is set to false by default.
+   The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+   	- incremental was set to true
+   	- include was updated to add '.next/types/**/*.ts'
+   	- plugins was updated to add { name: 'next' }
+
+ ✓ Ready in 4s
+ ○ Compiling /_not-found ...
+ ⨯ src/app/layout.tsx
+An error occurred in `next/font`.
+
+ReferenceError: module is not defined in ES module scope
+This file is being treated as an ES module because it has a '.js' file extension and '/Users/wanqilin/WorkSpace/ai/assetgen/web/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///Users/wanqilin/WorkSpace/ai/assetgen/web/postcss.config.js:1:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async findConfig (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/lib/find-config.js:85:25)
+    at async getPostCssPlugins (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:89:18)
+    at async /Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/trace/trace.js:154:20)
+ ⨯ src/app/layout.tsx
+An error occurred in `next/font`.
+
+ReferenceError: module is not defined in ES module scope
+This file is being treated as an ES module because it has a '.js' file extension and '/Users/wanqilin/WorkSpace/ai/assetgen/web/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+    at file:///Users/wanqilin/WorkSpace/ai/assetgen/web/postcss.config.js:1:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+    at async findConfig (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/lib/find-config.js:85:25)
+    at async getPostCssPlugins (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/build/webpack/config/blocks/css/plugins.js:89:18)
+    at async /Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/build/webpack/config/blocks/css/index.js:124:36
+    at async /Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js:86:33
+    at async Span.traceAsyncFn (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/trace/trace.js:154:20)
+ GET / 500 in 2001ms
+[?25h
+
+> web@0.1.0 dev
+> next dev --port 3000
+
+  ▲ Next.js 14.2.8
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · typedRoutes
+
+ ✓ Starting...
+ ✓ Ready in 1661ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.7s (488 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 2796ms
+ GET /_next/static/webpack/d5d93fbb02cc50f1.webpack.hot-update.json 404 in 2839ms
+ GET / 200 in 18ms
+ ✓ Compiled in 119ms (247 modules)
+ ✓ Compiled in 228ms (476 modules)
+ ✓ Compiled in 171ms (476 modules)
+ ✓ Compiled in 209ms (476 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ src/app/page.tsx (31:38) @ MODEL_PRESETS
+ ⨯ ReferenceError: MODEL_PRESETS is not defined
+    at HomePage (./src/app/page.tsx:49:79)
+digest: "1630867796"
+[0m [90m 29 |[39m   [36mconst[39m [gridSize[33m,[39m setGridSize] [33m=[39m useState([35m16[39m)[33m;[39m[0m
+[0m [90m 30 |[39m   [36mconst[39m [paletteLimit[33m,[39m setPaletteLimit] [33m=[39m useState([35m6[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 31 |[39m   [36mconst[39m [model[33m,[39m setModel] [33m=[39m useState([33mMODEL_PRESETS[39m[[35m0[39m][33m.[39mvalue)[33m;[39m[0m
+[0m [90m    |[39m                                      [31m[1m^[22m[39m[0m
+[0m [90m 32 |[39m   [36mconst[39m [artworks[33m,[39m setArtworks] [33m=[39m useState[33m<[39m[33mArtwork[39m[][33m>[39m([])[33m;[39m[0m
+[0m [90m 33 |[39m   [36mconst[39m [leaderboard[33m,[39m setLeaderboard] [33m=[39m useState[33m<[39m[33mLeaderboardEntry[39m[][33m>[39m([])[33m;[39m[0m
+[0m [90m 34 |[39m   [36mconst[39m [generated[33m,[39m setGenerated] [33m=[39m useState[33m<[39m[33mGeneratedPixelArt[39m [33m|[39m [36mnull[39m[33m>[39m([36mnull[39m)[33m;[39m[0m
+ GET / 500 in 123ms
+ ✓ Compiled in 271ms (476 modules)
+ ⨯ src/app/page.tsx (251:16) @ MODEL_PRESETS
+ ⨯ ReferenceError: MODEL_PRESETS is not defined
+    at HomePage (./src/app/page.tsx:505:51)
+digest: "3417487811"
+[0m [90m 249 |[39m               className[33m=[39m[32m"mt-2 w-full rounded-xl border border-white/20 bg-black/30 px-3 py-2 text-sm"[39m[0m
+[0m [90m 250 |[39m             [33m>[39m[0m
+[0m[31m[1m>[22m[39m[90m 251 |[39m               {[33mMODEL_PRESETS[39m[33m.[39mmap((preset) [33m=>[39m ([0m
+[0m [90m     |[39m                [31m[1m^[22m[39m[0m
+[0m [90m 252 |[39m                 [33m<[39m[33moption[39m key[33m=[39m{preset[33m.[39mvalue} value[33m=[39m{preset[33m.[39mvalue}[33m>[39m[0m
+[0m [90m 253 |[39m                   {preset[33m.[39mlabel}[0m
+[0m [90m 254 |[39m                 [33m<[39m[33m/[39m[33moption[39m[33m>[39m[0m
+ GET / 500 in 82ms
+ ✓ Compiled in 169ms (476 modules)
+ GET / 200 in 86ms
+ ✓ Compiled /_not-found in 306ms (465 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 380ms
+ ✓ Compiled in 466ms (476 modules)
+ ✓ Compiled in 165ms (476 modules)
+ ✓ Compiled in 144ms (476 modules)
+ GET / 200 in 136ms
+ ✓ Compiled in 214ms (476 modules)
+ ✓ Compiled in 128ms (476 modules)
+ ✓ Compiled in 191ms (476 modules)
+ ✓ Compiled in 108ms (476 modules)
+ GET / 200 in 63ms
+ ✓ Compiled in 214ms (476 modules)
+ GET / 200 in 63ms
+ ✓ Compiled in 237ms (476 modules)
+ GET / 200 in 76ms
+ GET / 200 in 58ms
+ ✓ Compiled in 174ms (476 modules)
+ ✓ Compiled in 359ms (476 modules)
+ ✓ Compiled in 183ms (476 modules)
+ ✓ Compiled /_not-found in 124ms (465 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 202ms
+ GET / 200 in 52ms
+ ✓ Compiled in 197ms (247 modules)
+ ✓ Compiled in 428ms (521 modules)
+ ⚠ Fast Refresh had to perform a full reload when ssetgen/web/node_modules/next/font/google/target.css?{\"path\":\"src/app/layout.tsx\",\"import\":\"Inter\",\"arguments\":[{\"subsets\":[\"latin\"]}],\"variableName\":\"inter\"}","ids":[]}, ssetgen/web/src/app/globals.css","ids":[]}, ssetgen/web/src/components/site-nav.tsx","ids":["SiteNav"]} changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 193ms
+ ✓ Compiled in 101ms (269 modules)
+ ✓ Compiled in 267ms (507 modules)
+ ✓ Compiled in 166ms (507 modules)
+ ✓ Compiled in 62ms (261 modules)
+ ✓ Compiled in 118ms (261 modules)
+ ✓ Compiled in 156ms (493 modules)
+ ✓ Compiled in 91ms (261 modules)
+ ✓ Compiled in 164ms (261 modules)
+ ✓ Compiled in 208ms (493 modules)
+ ✓ Compiled in 168ms (261 modules)
+ ✓ Compiled in 77ms (261 modules)
+ ✓ Compiled in 1489ms (261 modules)
+ ✓ Compiled in 140ms (261 modules)
+ ✓ Compiled in 80ms (261 modules)
+ ✓ Compiled in 72ms (261 modules)
+ ✓ Compiled in 144ms (507 modules)
+ ✓ Compiled in 213ms (507 modules)
+ ○ Compiling /generate ...
+ ✓ Compiled /generate in 511ms (509 modules)
+ ✓ Compiled /community in 338ms (517 modules)
+ ✓ Compiled /leaderboard in 402ms (525 modules)
+ ✓ Compiled in 281ms (274 modules)
+ ✓ Compiled in 179ms (534 modules)
+ ✓ Compiled in 190ms (534 modules)
+ ✓ Compiled in 178ms (534 modules)
+ GET /generate 200 in 125ms
+ ✓ Compiled in 148ms (274 modules)
+ ✓ Compiled in 235ms (534 modules)
+ ✓ Compiled in 183ms (534 modules)
+ GET /generate 200 in 98ms
+ ✓ Compiled in 173ms (274 modules)
+ ✓ Compiled in 547ms (536 modules)
+ ✓ Compiled in 160ms (275 modules)
+ ✓ Compiled in 359ms (536 modules)
+ ✓ Compiled in 196ms (536 modules)
+ ✓ Compiled in 224ms (536 modules)
+ ✓ Compiled in 222ms (536 modules)
+ ✓ Compiled in 335ms (536 modules)
+ ✓ Compiled in 324ms (536 modules)
+ GET /generate 200 in 217ms
+ ✓ Compiled in 292ms (536 modules)
+ ✓ Compiled in 349ms (536 modules)
+ GET /generate 200 in 85ms
+ ✓ Compiled in 209ms (275 modules)
+ ✓ Compiled in 313ms (536 modules)
+ ✓ Compiled in 187ms (538 modules)
+ ✓ Compiled in 104ms (276 modules)
+ ✓ Compiled in 575ms (542 modules)
+ ✓ Compiled in 207ms (278 modules)
+ ✓ Compiled in 113ms (278 modules)
+ ✓ Compiled in 285ms (542 modules)
+ GET /generate 200 in 119ms
+ ✓ Compiled in 291ms (542 modules)
+ ✓ Compiled in 212ms (542 modules)
+ ✓ Compiled /_not-found in 355ms (531 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 442ms
+ ✓ Compiled in 336ms (542 modules)
+ ✓ Compiled in 70ms (278 modules)
+ ✓ Compiled /_not-found in 157ms (531 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 254ms
+ ✓ Compiled in 360ms (542 modules)
+ ⨯ ./src/components/pixel-step-player.tsx
+Error: 
+  [31mx[0m Nullish coalescing operator(??) requires parens when mixing with logical operators
+    ,-[[36;1;4m/Users/wanqilin/WorkSpace/ai/assetgen/web/src/components/pixel-step-player.tsx[0m:19:1]
+ [2m19[0m | 
+ [2m20[0m | export function PixelStepPlayer({ size, palette, steps, pixelSize }: Props) {
+ [2m21[0m |   const fallbackColor = palette[0] ?? '#000000';
+ [2m22[0m |   const resolvedPixelSize = useMemo(() => Math.max(2, pixelSize ?? Math.floor(320 / size) || 8), [pixelSize, size]);
+    : [31;1m                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+ [2m23[0m | 
+ [2m24[0m |   const createBlankGrid = useCallback(() => {
+ [2m25[0m |     return Array.from({ length: size }, () => Array(size).fill(fallbackColor));
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/pixel-step-player.tsx
+./src/app/generate/page.tsx
+ ⨯ ./src/components/pixel-step-player.tsx
+Error: 
+  [31mx[0m Nullish coalescing operator(??) requires parens when mixing with logical operators
+    ,-[[36;1;4m/Users/wanqilin/WorkSpace/ai/assetgen/web/src/components/pixel-step-player.tsx[0m:19:1]
+ [2m19[0m | 
+ [2m20[0m | export function PixelStepPlayer({ size, palette, steps, pixelSize }: Props) {
+ [2m21[0m |   const fallbackColor = palette[0] ?? '#000000';
+ [2m22[0m |   const resolvedPixelSize = useMemo(() => Math.max(2, pixelSize ?? Math.floor(320 / size) || 8), [pixelSize, size]);
+    : [31;1m                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+ [2m23[0m | 
+ [2m24[0m |   const createBlankGrid = useCallback(() => {
+ [2m25[0m |     return Array.from({ length: size }, () => Array(size).fill(fallbackColor));
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/pixel-step-player.tsx
+./src/app/generate/page.tsx
+ ⨯ ./src/components/pixel-step-player.tsx
+Error: 
+  [31mx[0m Nullish coalescing operator(??) requires parens when mixing with logical operators
+    ,-[[36;1;4m/Users/wanqilin/WorkSpace/ai/assetgen/web/src/components/pixel-step-player.tsx[0m:19:1]
+ [2m19[0m | 
+ [2m20[0m | export function PixelStepPlayer({ size, palette, steps, pixelSize }: Props) {
+ [2m21[0m |   const fallbackColor = palette[0] ?? '#000000';
+ [2m22[0m |   const resolvedPixelSize = useMemo(() => Math.max(2, pixelSize ?? Math.floor(320 / size) || 8), [pixelSize, size]);
+    : [31;1m                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+ [2m23[0m | 
+ [2m24[0m |   const createBlankGrid = useCallback(() => {
+ [2m25[0m |     return Array.from({ length: size }, () => Array(size).fill(fallbackColor));
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/pixel-step-player.tsx
+./src/app/generate/page.tsx
+ ✓ Compiled in 122ms (542 modules)
+ GET /generate 200 in 86ms
+ ✓ Compiled /leaderboard in 209ms (269 modules)
+ ✓ Compiled in 164ms (278 modules)
+ ✓ Compiled in 130ms (278 modules)
+ ✓ Compiled in 114ms (278 modules)
+ ✓ Compiled in 135ms (278 modules)
+ ✓ Compiled in 230ms (533 modules)
+ ✓ Compiled in 67ms (278 modules)
+ ✓ Compiled in 191ms (533 modules)
+ ✓ Compiled in 57ms (278 modules)
+ ✓ Compiled in 156ms (533 modules)
+ ✓ Compiled in 233ms (547 modules)
+ ✓ Compiled in 303ms (547 modules)
+ ✓ Compiled in 233ms (547 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /community 200 in 131ms
+ ✓ Compiled in 184ms (547 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /community 200 in 112ms
+ ✓ Compiled in 63ms (278 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /community 200 in 26ms
+ GET /community 200 in 38ms
+ GET / 200 in 50ms
+ GET / 200 in 44ms
+ ✓ Compiled in 358ms (547 modules)
+[?25h
+
+> web@0.1.0 dev
+> next dev --port 3000
+
+  ▲ Next.js 14.2.8
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · typedRoutes
+
+ ✓ Starting...
+ ✓ Ready in 2.1s
+ ○ Compiling /leaderboard ...
+ ✓ Compiled /leaderboard in 1083ms (515 modules)
+ GET /leaderboard 200 in 1187ms
+ ○ Compiling /api/leaderboard ...
+ ✓ Compiled /api/leaderboard in 661ms (281 modules)
+ GET /api/leaderboard?limit=10 200 in 712ms
+ GET /api/leaderboard?limit=10 200 in 6ms
+ ✓ Compiled /generate in 321ms (565 modules)
+ ✓ Compiled /community in 165ms (559 modules)
+ ✓ Compiled /api/artworks in 54ms (298 modules)
+ GET /api/artworks 200 in 91ms
+ GET /api/artworks 200 in 2ms
+ GET /api/leaderboard?limit=10 200 in 4ms
+ GET /api/leaderboard?limit=10 200 in 2ms
+ ✓ Compiled / in 137ms (567 modules)
+ ✓ Compiled in 312ms (576 modules)
+ ✓ Compiled in 133ms (532 modules)
+ ✓ Compiled in 304ms (532 modules)
+ ✓ Compiled in 278ms (532 modules)
+ ✓ Compiled in 193ms (532 modules)
+ ✓ Compiled in 158ms (532 modules)
+ ✓ Compiled in 104ms (278 modules)
+ ✓ Compiled in 117ms (278 modules)
+ ✓ Compiled in 196ms (278 modules)
+ ✓ Compiled in 87ms (278 modules)
+ ✓ Compiled in 150ms (278 modules)
+ ✓ Compiled in 67ms (278 modules)
+ ✓ Compiled /api/artworks in 199ms (286 modules)
+ POST /api/artworks 201 in 255ms
+ ✓ Compiled /community in 147ms (291 modules)
+ GET /api/artworks 200 in 12ms
+ GET /api/artworks 200 in 7ms
+ GET /api/artworks 200 in 5ms
+ GET /api/artworks 200 in 6ms
+ ✓ Compiled /leaderboard in 108ms (296 modules)
+ ✓ Compiled /api/leaderboard in 50ms (298 modules)
+ GET /api/leaderboard?limit=10 200 in 77ms
+ GET /api/leaderboard?limit=10 200 in 3ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 7ms
+ GET /community 200 in 78ms
+ GET /api/artworks 200 in 5ms
+ GET /api/artworks 200 in 3ms
+ GET /api/artworks 200 in 14ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 6ms
+ ✓ Compiled /_not-found in 281ms (558 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 368ms
+ POST /api/artworks 201 in 26ms
+ GET /generate 200 in 57ms
+ GET /api/artworks 200 in 10ms
+ GET /api/artworks 200 in 13ms
+ GET /community 200 in 39ms
+ GET /api/artworks 200 in 12ms
+ GET /api/artworks 200 in 5ms
+ ✓ Compiled /api/artworks/[id]/like in 120ms (293 modules)
+ POST /api/artworks/cc5f2d1e-7f04-48e9-bcf7-8ab1f0f6f6b3/like 404 in 345ms
+ POST /api/artworks/cc5f2d1e-7f04-48e9-bcf7-8ab1f0f6f6b3/like 404 in 7ms
+ POST /api/artworks/cc5f2d1e-7f04-48e9-bcf7-8ab1f0f6f6b3/like 404 in 7ms
+ POST /api/artworks/cc5f2d1e-7f04-48e9-bcf7-8ab1f0f6f6b3/like 404 in 4ms
+ POST /api/artworks/cc5f2d1e-7f04-48e9-bcf7-8ab1f0f6f6b3/like 404 in 4ms
+ ✓ Compiled /leaderboard in 42ms (298 modules)
+ ✓ Compiled /api/leaderboard in 47ms (300 modules)
+ GET /api/leaderboard?limit=10 200 in 85ms
+ GET /api/leaderboard?limit=10 200 in 2ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 6ms
+ GET /community 200 in 56ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 2ms
+ GET /api/leaderboard?limit=10 200 in 7ms
+ GET /api/leaderboard?limit=10 200 in 3ms
+ GET /api/artworks 200 in 7ms
+ GET /api/artworks 200 in 5ms
+ GET /community 200 in 26ms
+ GET /api/artworks 200 in 5ms
+ GET /api/artworks 200 in 4ms
+ POST /api/artworks 201 in 12ms
+ GET /community 200 in 18ms
+ GET /api/artworks 200 in 5ms
+ GET /api/artworks 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 14ms
+ GET /community 200 in 24ms
+ GET /api/artworks 200 in 5ms
+ GET /api/artworks 200 in 4ms
+ GET /community 200 in 24ms
+ GET /api/artworks 200 in 7ms
+ GET /api/artworks 200 in 12ms
+ GET /api/leaderboard?limit=10 200 in 4ms
+ GET /api/leaderboard?limit=10 200 in 4ms
+ GET /api/artworks 200 in 4ms
+ GET /api/artworks 200 in 3ms
+ GET /community 200 in 27ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 3ms
+ GET /api/artworks 200 in 8ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 10ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 5ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 7ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 10ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 3ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 5ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 3ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 5ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 6ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 6ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 5ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 8ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 8ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 5ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 5ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 3ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ POST /api/artworks/2b40338b-fb15-42de-ab80-bb78a821687b/like 200 in 4ms
+ GET /api/leaderboard?limit=10 200 in 5ms
+ GET /api/leaderboard?limit=10 200 in 8ms
+ ✓ Compiled / in 246ms (269 modules)
+ ✓ Compiled /api/artworks in 116ms (301 modules)
+ GET /api/artworks 200 in 167ms
+ GET /api/artworks 200 in 3ms
+ GET /api/artworks 200 in 3ms
+ GET /api/artworks 200 in 5ms
+ ✓ Compiled /api/leaderboard in 53ms (303 modules)
+ GET /api/leaderboard?limit=10 200 in 90ms
+ GET /api/leaderboard?limit=10 200 in 3ms
+ GET /api/artworks 200 in 7ms
+ GET /api/artworks 200 in 4ms
+ GET /api/artworks 200 in 4ms
+ GET /api/artworks 200 in 32ms
+ GET /leaderboard 200 in 172ms
+ GET /api/leaderboard?limit=10 200 in 17ms
+ GET /api/leaderboard?limit=10 200 in 9ms
+ GET /api/artworks 200 in 12ms
+ GET /api/artworks 200 in 13ms
+ ✓ Compiled in 276ms (581 modules)
+ ✓ Compiled in 243ms (581 modules)
+ ✓ Compiled in 128ms (581 modules)
+ ✓ Compiled in 223ms (581 modules)
+ ✓ Compiled in 110ms (278 modules)
+ ✓ Compiled in 148ms (278 modules)
+ ✓ Compiled in 84ms (278 modules)
+ ✓ Compiled in 59ms (278 modules)
+ ✓ Compiled in 162ms (528 modules)
+ ✓ Compiled in 215ms (542 modules)
+ ✓ Compiled in 178ms (542 modules)
+ ✓ Compiled in 235ms (542 modules)
+ ✓ Compiled in 267ms (542 modules)
+ ✓ Compiled in 113ms (278 modules)
+[?25h
+
+> web@0.1.0 dev
+> next dev --port 3000
+
+  ▲ Next.js 14.2.8
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · typedRoutes
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling /community ...
+ ✓ Compiled /community in 2.2s (530 modules)
+ GET /community 200 in 2287ms
+ ○ Compiling /api/artworks ...
+ ✓ Compiled /api/artworks in 666ms (284 modules)
+ GET /api/artworks 200 in 737ms
+ GET /api/artworks 200 in 8ms
+ ✓ Compiled /generate in 482ms (565 modules)
+ GET /generate 200 in 60ms
+ POST /api/artworks 201 in 20ms
+ POST /api/artworks 201 in 8ms
+ POST /api/artworks 201 in 8ms
+ GET /community 200 in 48ms
+ GET /api/artworks 200 in 4ms
+ GET /api/artworks 200 in 3ms
+ ✓ Compiled /api/artworks/[id]/like in 144ms (293 modules)
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 438ms
+ ✓ Compiled /leaderboard in 197ms (561 modules)
+ ✓ Compiled /api/leaderboard in 69ms (300 modules)
+ GET /api/leaderboard?limit=10 200 in 95ms
+ GET /api/leaderboard?limit=10 200 in 3ms
+ ✓ Compiled /artwork/[id] in 236ms (577 modules)
+ GET /api/artworks 200 in 23ms
+ GET /api/artworks 200 in 6ms
+ GET /community 200 in 68ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 4ms
+ GET /community 200 in 21ms
+ GET /api/artworks 200 in 5ms
+ GET /api/artworks 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 13ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ GET /community 200 in 22ms
+ GET /api/artworks 200 in 4ms
+ GET /api/artworks 200 in 11ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 2ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 7ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 7ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 2ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ GET /community 200 in 19ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 9ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 8ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 6ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ GET /community 200 in 28ms
+ GET /api/artworks 200 in 3ms
+ GET /api/artworks 200 in 8ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 7ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ GET /api/artworks 200 in 7ms
+ GET /api/artworks 200 in 5ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 8ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 25ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 3ms
+ POST /api/artworks/02001a52-2763-4e35-a335-bf8568e371bc/like 200 in 4ms
+ POST /api/artworks/cb888dcb-6147-4ced-9a7d-3ee76a104197/like 200 in 9ms
+ POST /api/artworks/cb888dcb-6147-4ced-9a7d-3ee76a104197/like 200 in 3ms
+ POST /api/artworks/cb888dcb-6147-4ced-9a7d-3ee76a104197/like 200 in 4ms
+ POST /api/artworks/cb888dcb-6147-4ced-9a7d-3ee76a104197/like 200 in 4ms
+ GET /api/leaderboard?limit=10 200 in 4ms
+ GET /api/leaderboard?limit=10 200 in 2ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 3ms
+ POST /api/artworks/a609870f-44e5-45ce-97a6-dea06bbe2f2f/like 200 in 8ms
+ POST /api/artworks/a609870f-44e5-45ce-97a6-dea06bbe2f2f/like 200 in 3ms
+ POST /api/artworks/a609870f-44e5-45ce-97a6-dea06bbe2f2f/like 200 in 4ms
+ GET /community 200 in 23ms
+ GET /api/artworks 200 in 8ms
+ GET /api/artworks 200 in 10ms
+ GET /api/leaderboard?limit=10 200 in 4ms
+ GET /api/leaderboard?limit=10 200 in 22ms
+ ✓ Compiled in 327ms (591 modules)
+ GET /generate 200 in 88ms
+Failed to create artwork TypeError: Cannot read properties of undefined (reading 'has')
+    at addArtwork (webpack-internal:///(rsc)/./src/server/memory-store.ts:52:22)
+    at POST (webpack-internal:///(rsc)/./src/app/api/artworks/route.ts:23:89)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:55753
+    at async eO.execute (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:46523)
+    at async eO.handle (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:6:57007)
+    at async doRender (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/base-server.js:1359:42)
+    at async cacheEntry.responseCache.get.routeKind (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/base-server.js:1581:28)
+    at async DevServer.renderToResponseWithComponentsImpl (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/base-server.js:1489:28)
+    at async DevServer.renderPageComponent (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/base-server.js:1913:24)
+    at async DevServer.renderToResponseImpl (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/base-server.js:1951:32)
+    at async DevServer.pipeImpl (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/base-server.js:917:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/base-server.js:813:17)
+    at async /Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/lib/router-server.js:173:21)
+    at async handleRequest (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/lib/router-server.js:350:24)
+    at async requestHandlerImpl (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/lib/router-server.js:374:13)
+    at async Server.requestListener (/Users/wanqilin/WorkSpace/ai/assetgen/web/node_modules/next/dist/server/lib/start-server.js:141:13)
+ POST /api/artworks 500 in 63ms
+ ✓ Compiled in 687ms (587 modules)
+ ✓ Compiled in 266ms (587 modules)
+ GET /api/artworks 200 in 63ms
+ GET /api/artworks 200 in 4ms
+ GET /community 200 in 123ms
+ GET /api/artworks 200 in 13ms
+ GET /api/artworks 200 in 18ms
+ ✓ Compiled in 247ms (587 modules)
+ ✓ Compiled in 390ms (587 modules)
+[?25h
+
+> web@0.1.0 dev
+> next dev --port 3000
+
+  ▲ Next.js 14.2.8
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · typedRoutes
+
+ ✓ Starting...
+ ✓ Ready in 2.6s
+ ○ Compiling /community ...
+ ✓ Compiled /generate in 2.8s (533 modules)
+ GET /generate 200 in 506ms
+ ✓ Compiled /api/artworks in 356ms (291 modules)
+ GET /api/artworks 200 in 402ms
+ GET /api/artworks 200 in 4ms
+ POST /api/artworks 201 in 18ms
+ GET /api/artworks 200 in 5ms
+ GET /api/artworks 200 in 6ms
+ ✓ Compiled /api/artworks/[id]/like in 142ms (293 modules)
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 367ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 7ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 6ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 6ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 3ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 5ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ POST /api/artworks/8b7938c4-e19f-49e7-aeff-57c312a17ca5/like 200 in 4ms
+ ✓ Compiled /artwork/[id] in 189ms (567 modules)
+ POST /api/artworks 201 in 33ms
+ GET /api/artworks 200 in 6ms
+ GET /api/artworks 200 in 8ms
+ POST /api/artworks/b0ea3221-1cff-4b21-8e6b-42155055f69b/like 200 in 16ms
+ POST /api/artworks/b0ea3221-1cff-4b21-8e6b-42155055f69b/like 200 in 5ms
+ POST /api/artworks/b0ea3221-1cff-4b21-8e6b-42155055f69b/like 200 in 9ms
+ POST /api/artworks/b0ea3221-1cff-4b21-8e6b-42155055f69b/like 200 in 5ms
+ ✓ Compiled /leaderboard in 256ms (575 modules)
+ ✓ Compiled /api/leaderboard in 85ms (312 modules)
+ GET /api/leaderboard?limit=10 200 in 123ms
+ GET /api/leaderboard?limit=10 200 in 6ms
+ POST /api/artworks 201 in 38ms
+ GET /api/artworks 200 in 48ms
+ GET /api/artworks 200 in 21ms
+ GET /api/artworks 200 in 36ms
+ GET /api/artworks 200 in 12ms
+ GET /community 200 in 88ms
+ GET /api/artworks 200 in 14ms
+ GET /api/artworks 200 in 8ms
+ POST /api/artworks 201 in 18ms
+ POST /api/artworks 201 in 10ms
+ GET /community 200 in 27ms
+ GET /api/artworks 200 in 31ms
+ GET /api/artworks 200 in 49ms
+ GET /community 200 in 28ms
+ GET /api/artworks 200 in 17ms
+ GET /api/artworks 200 in 16ms
+ GET /generate 200 in 44ms
+[?25h
+
+> web@0.1.0 dev
+> next dev --port 3000
+
+  ▲ Next.js 14.2.8
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · typedRoutes
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling /generate ...
+ ✓ Compiled /generate in 2.5s (534 modules)
+ GET /generate 200 in 2621ms
+ ✓ Compiled in 306ms (525 modules)
+ ✓ Compiled in 202ms (525 modules)
+ ⨯ ./src/components/pixel-step-player.tsx
+Error: 
+  [31mx[0m cannot reassign to a variable declared with `const`
+    ,-[[36;1;4m/Users/wanqilin/WorkSpace/ai/assetgen/web/src/components/pixel-step-player.tsx[0m:19:1]
+ [2m19[0m |   return normalized < 0 ? normalized + paletteLength : normalized;
+ [2m20[0m | }
+ [2m21[0m | 
+ [2m22[0m | export function PixelStepPlayer({ size, palette, steps, pixelSize, speed, onSpeedChange }: Props) {
+    : [31;1m                                                                   ^^|^^[0m
+    :                                                                      [31;1m`-- [31;1mcannot reassign[0m[0m
+ [2m23[0m |   const fallbackColor = palette[0] ?? '#000000';
+ [2m24[0m |   const resolvedPixelSize = useMemo(() => {
+ [2m25[0m |     const autoSize = Math.max(3, Math.floor(320 / Math.max(size, 1)));
+ [2m26[0m |     return Math.max(2, pixelSize ?? autoSize);
+ [2m27[0m |   }, [pixelSize, size]);
+ [2m28[0m | 
+ [2m29[0m |   const createBlankGrid = useCallback(() => {
+ [2m30[0m |     return Array.from({ length: size }, () => Array(size).fill(fallbackColor));
+ [2m31[0m |   }, [size, fallbackColor]);
+ [2m32[0m | 
+ [2m33[0m |   const [grid, setGrid] = useState<string[][]>(() => createBlankGrid());
+ [2m34[0m |   const [pointer, setPointer] = useState(0);
+ [2m35[0m |   const [isPlaying, setIsPlaying] = useState(false);
+ [2m36[0m |   const [speed, setSpeed] = useState(120);
+    : [33;1m         ^^|^^[0m
+    :            [33;1m`-- [33;1mconst variable was declared here[0m[0m
+ [2m37[0m |   const [paintedPixels, setPaintedPixels] = useState(0);
+ [2m38[0m |   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+    `----
+
+  [31mx[0m the name `speed` is defined multiple times
+    ,-[[36;1;4m/Users/wanqilin/WorkSpace/ai/assetgen/web/src/components/pixel-step-player.tsx[0m:19:1]
+ [2m19[0m |   return normalized < 0 ? normalized + paletteLength : normalized;
+ [2m20[0m | }
+ [2m21[0m | 
+ [2m22[0m | export function PixelStepPlayer({ size, palette, steps, pixelSize, speed, onSpeedChange }: Props) {
+    : [31;1m                                                                   ^^|^^[0m
+    :                                                                      [31;1m`-- [31;1mprevious definition of `speed` here[0m[0m
+ [2m23[0m |   const fallbackColor = palette[0] ?? '#000000';
+ [2m24[0m |   const resolvedPixelSize = useMemo(() => {
+ [2m25[0m |     const autoSize = Math.max(3, Math.floor(320 / Math.max(size, 1)));
+ [2m26[0m |     return Math.max(2, pixelSize ?? autoSize);
+ [2m27[0m |   }, [pixelSize, size]);
+ [2m28[0m | 
+ [2m29[0m |   const createBlankGrid = useCallback(() => {
+ [2m30[0m |     return Array.from({ length: size }, () => Array(size).fill(fallbackColor));
+ [2m31[0m |   }, [size, fallbackColor]);
+ [2m32[0m | 
+ [2m33[0m |   const [grid, setGrid] = useState<string[][]>(() => createBlankGrid());
+ [2m34[0m |   const [pointer, setPointer] = useState(0);
+ [2m35[0m |   const [isPlaying, setIsPlaying] = useState(false);
+ [2m36[0m |   const [speed, setSpeed] = useState(120);
+    : [33;1m         ^^|^^[0m
+    :            [33;1m`-- [33;1m`speed` redefined here[0m[0m
+ [2m37[0m |   const [paintedPixels, setPaintedPixels] = useState(0);
+ [2m38[0m |   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+    `----
+
+Import trace for requested module:
+./src/components/pixel-step-player.tsx
+./src/app/generate/page.tsx
+ ✓ Compiled in 151ms (525 modules)
+ ✓ Compiled in 157ms (525 modules)
+ ✓ Compiled in 412ms (525 modules)
+ ✓ Compiled in 146ms (525 modules)
+ ✓ Compiled in 383ms (525 modules)
+ ✓ Compiled in 212ms (525 modules)
+ ✓ Compiled in 381ms (525 modules)
+ ✓ Compiled in 510ms (525 modules)
+ ✓ Compiled in 193ms (525 modules)
+ ✓ Compiled in 123ms (525 modules)
+ ✓ Compiled in 83ms (271 modules)
+ GET /generate 200 in 86ms
+ ✓ Compiled in 301ms (525 modules)

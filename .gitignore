@@ -1,0 +1,15 @@
+# Node / Next
+web/node_modules
+web/.next
+web/.turbo
+web/out
+
+# Go build artifacts
+server/bin
+server/dist
+
+# OS
+.DS_Store
+
+# Env
+.env
