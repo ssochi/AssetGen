@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useMemo, useState, useTransition } from 'react';
 import { PixelPreview } from './pixel-preview';
 import { Artwork } from '@/lib/types';
@@ -10,6 +9,7 @@ import { downloadSpriteGif, downloadSpritePng } from '@/lib/exporters';
 interface Props {
   artwork: Artwork;
   onUpdate?: (artwork: Artwork) => void;
+  onViewDetails?: (artwork: Artwork) => void;
 }
 
 function formatDuration(durationMs: number) {
@@ -21,7 +21,7 @@ function formatDuration(durationMs: number) {
   return `${minutes}m ${remainingSeconds}s`;
 }
 
-export function ArtworkCard({ artwork, onUpdate }: Props) {
+export function ArtworkCard({ artwork, onUpdate, onViewDetails }: Props) {
   const [pending, startTransition] = useTransition();
   const [downloadingPng, setDownloadingPng] = useState(false);
   const [downloadingGif, setDownloadingGif] = useState(false);
@@ -133,12 +133,15 @@ export function ArtworkCard({ artwork, onUpdate }: Props) {
           {downloadingGif ? 'Exporting GIF...' : 'Download GIF'}
         </button>
         <span className="text-white/40">{safeSteps.length ? `${safeSteps.length} steps` : 'No step data'}</span>
-        <Link
-          href={`/artwork?id=${artwork.id}`}
-          className="rounded-full border border-transparent px-3 py-1 text-white/70 transition hover:text-white"
-        >
-          View details →
-        </Link>
+        {onViewDetails && (
+          <button
+            type="button"
+            onClick={() => onViewDetails(artwork)}
+            className="rounded-full border border-transparent px-3 py-1 text-white/70 transition hover:text-white"
+          >
+            View details →
+          </button>
+        )}
       </div>
     </div>
   );

@@ -4,9 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchLeaderboard } from '@/lib/api';
 import { LeaderboardEntry } from '@/lib/types';
 import { Leaderboard } from '@/components/leaderboard';
+import { ArtworkModal } from '@/components/artwork-modal';
 
 export default function LeaderboardPage() {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
+  const [selected, setSelected] = useState<LeaderboardEntry | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -51,8 +53,10 @@ export default function LeaderboardPage() {
       {isLoading && !entries.length ? (
         <div className="rounded-2xl border border-dashed border-white/20 p-8 text-center text-white/60">Loading leaderboard...</div>
       ) : (
-        <Leaderboard entries={entries} />
+        <Leaderboard entries={entries} onSelect={(entry) => setSelected(entry)} />
       )}
+
+      {selected && <ArtworkModal artwork={selected} onClose={() => setSelected(null)} />}
     </main>
   );
 }

@@ -4,9 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { Artwork } from '@/lib/types';
 import { ArtworkCard } from '@/components/artwork-card';
 import { fetchArtworks } from '@/lib/api';
+import { ArtworkModal } from '@/components/artwork-modal';
 
 export default function CommunityPage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
+  const [selected, setSelected] = useState<Artwork | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -59,6 +61,7 @@ export default function CommunityPage() {
               onUpdate={(updated) =>
                 setArtworks((prev) => prev.map((item) => (item.id === updated.id ? updated : item)))
               }
+              onViewDetails={setSelected}
             />
           ))}
         </div>
@@ -66,7 +69,9 @@ export default function CommunityPage() {
         <div className="rounded-2xl border border-dashed border-white/20 p-8 text-center text-white/60">
           No one has published yet—be the first to share your sprite!
         </div>
-     )}
+      )}
+
+      {selected && <ArtworkModal artwork={selected} onClose={() => setSelected(null)} />}
     </main>
   );
 }

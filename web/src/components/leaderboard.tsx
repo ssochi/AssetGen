@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { LeaderboardEntry } from '@/lib/types';
 import { PixelPreview } from './pixel-preview';
 
 interface Props {
   entries: LeaderboardEntry[];
+  onSelect?: (entry: LeaderboardEntry) => void;
 }
 
 function formatDuration(durationMs: number) {
@@ -18,7 +18,7 @@ function formatDuration(durationMs: number) {
   return `${minutes}m ${remain}s`;
 }
 
-export function Leaderboard({ entries }: Props) {
+export function Leaderboard({ entries, onSelect }: Props) {
   if (!entries.length) {
     return (
       <div className="rounded-2xl border border-white/10 bg-black/30 p-6 text-white/60">
@@ -49,12 +49,15 @@ export function Leaderboard({ entries }: Props) {
             <p className="text-sm">{entry.likes} likes</p>
             <p className="text-xs text-white/50">{new Date(entry.createdAt).toLocaleDateString()}</p>
             <p className="text-xs text-white/50">Duration {formatDuration(entry.durationMs)}</p>
-            <Link
-              href={`/artwork?id=${entry.id}`}
-              className="mt-2 inline-flex text-xs text-brand-300 hover:text-brand-200"
-            >
-              View details →
-            </Link>
+            {onSelect && (
+              <button
+                type="button"
+                onClick={() => onSelect(entry)}
+                className="mt-2 inline-flex text-xs text-brand-300 hover:text-brand-200"
+              >
+                View details →
+              </button>
+            )}
           </div>
         </div>
       ))}
