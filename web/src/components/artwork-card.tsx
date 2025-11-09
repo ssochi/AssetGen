@@ -134,7 +134,7 @@ export function ArtworkCard({ artwork, onUpdate }: Props) {
         </button>
         <span className="text-white/40">{safeSteps.length ? `${safeSteps.length} steps` : 'No step data'}</span>
         <Link
-          href={`/artwork/${artwork.id}`}
+          href={`/artwork?id=${artwork.id}`}
           className="rounded-full border border-transparent px-3 py-1 text-white/70 transition hover:text-white"
         >
           View details →

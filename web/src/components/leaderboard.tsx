@@ -50,7 +50,7 @@ export function Leaderboard({ entries }: Props) {
             <p className="text-xs text-white/50">{new Date(entry.createdAt).toLocaleDateString()}</p>
             <p className="text-xs text-white/50">Duration {formatDuration(entry.durationMs)}</p>
             <Link
-              href={`/artwork/${entry.id}`}
+              href={`/artwork?id=${entry.id}`}
               className="mt-2 inline-flex text-xs text-brand-300 hover:text-brand-200"
             >
               View details →
