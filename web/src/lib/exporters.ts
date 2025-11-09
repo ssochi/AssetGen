@@ -52,6 +52,7 @@ export async function downloadSpriteGif(options: {
   delayMs?: number;
 }) {
   const { filename, size, palette, steps, pixelSize = Math.max(8, Math.floor(256 / size)), delayMs = 40 } = options;
+  const FINAL_PAUSE_MS = 3000;
   if (!steps.length) {
     throw new Error('No painting steps, cannot generate GIF');
   }
@@ -78,18 +79,24 @@ export async function downloadSpriteGif(options: {
     throw new Error('No animatable pixels found in the steps');
   }
 
-  events.forEach((event) => {
-    event.strokes.forEach((stroke) => {
-      if (stroke.x < 0 || stroke.x >= size || stroke.y < 0 || stroke.y >= size) return;
-      matrix[stroke.y][stroke.x] = colorFromPalette(stroke.ci ?? 0);
-    });
+  const writeFrame = (delay: number) => {
     drawMatrix(ctx, matrix, pixelSize);
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const rgba = new Uint8Array(imageData.data);
     const paletteData = quantize(rgba, 256);
     const index = applyPalette(rgba, paletteData);
-    gif.writeFrame(index, canvas.width, canvas.height, { palette: paletteData, delay: delayMs });
+    gif.writeFrame(index, canvas.width, canvas.height, { palette: paletteData, delay });
+  };
+
+  events.forEach((event) => {
+    event.strokes.forEach((stroke) => {
+      if (stroke.x < 0 || stroke.x >= size || stroke.y < 0 || stroke.y >= size) return;
+      matrix[stroke.y][stroke.x] = colorFromPalette(stroke.ci ?? 0);
+    });
+    writeFrame(delayMs);
   });
+
+  writeFrame(FINAL_PAUSE_MS);
 
   gif.finish();
   const buffer = gif.bytes();
